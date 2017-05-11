@@ -1,0 +1,110 @@
+.user-img{
+	background-color: transparent; 
+	border: none;
+	width: 55%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.navbar{
+	border: none;
+	-webkit-box-shadow: 3px 2px 31px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 31px -2px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 31px -2px rgba(0,0,0,0.75);
+}
+.navbar a{
+	margin: 6px;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.navbar-toggle{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+	color: white;
+}
+
+.carousel-caption{
+	width: 100%;
+	left: 0;
+	height: 100%;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.carousel-caption a:hover{
+	text-decoration: none;
+	transform: scale(1.1);
+}
+
+.carousel-caption a:active{
+	text-decoration: none;
+	transform: scale(1.1);
+}
+.carousel-caption > a{
+	transition: all .2s ease-in-out;
+	display: block;
+	display: -webkit- box;
+	color: white;
+	font-size: 33px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	bottom: 60px;
+	right: 0;
+	left: 0;
+	position: absolute;
+	max-width: 90%;
+	max-height: 180px;
+	margin: 0 auto;
+	padding: 0 10px;
+	line-height: 1.4;
+	-webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+	/*overflow-wrap: break-word;*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+}	
+
+.navbar-collapse{
+	float: right;
+}
+
+.navbarfull{
+	visibility: visible;
+	float: left; 
+	width: 210px; 
+	margin-left: 10px; 
+	margin-top: 15px;
+}
+
+.navbarcollapsed > div{
+	display: none;
+	visibility: hidden;
+}
+
+@media (max-width: 767px) {
+	.navbar-collapse {
+		float: left;
+	}
+	.navbarfull{
+		visibility: hidden;
+		margin: 0;
+		display: none;
+	}
+
+	.navbarcollapsed > div{
+		display: inline-table;
+		visibility: visible;
+		margin-top: 5px;
+		width: 90%;
+		left: 5%;
+	}
+}
+
+@media (min-width: 768px){
+	.navbar{
+		background-color: transparent;
+	}
+}

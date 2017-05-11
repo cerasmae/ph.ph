@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{blogpost.title}}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block pagecontent %}
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h1>{{blogpost.title}}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by <a href="#">{{blogpost.owner}}</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span><span>&nbsp;&nbsp;{{blogpost.create_date}}</span></p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead" align="right" style="color:red;">{{blogpost.content | linebreaks}}</p>
+                <hr>
+
+                <!-- Blog Comments -->
+
+                <!-- Comments Form -->
+                <div class="well">
+                    <form role="form" method="POST">
+                        {% csrf_token %}
+                        {% if request.user.is_authenticated %}
+                            <h4>Leave a Comment:</h4>
+                            <div class="form-group">
+                                <textarea name="comment" class="form-control" rows="3" maxlength="150"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        {% else %}
+                            <h4><a href="/login">Log in</a> to comment</h4>
+                            <div class="form-group">
+                                <textarea name="comment" class="form-control" rows="3" maxlength="150" disabled="True"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" disabled>Submit</button>
+                        {% endif %}
+                    </form>
+                </div>
+
+                <hr>
+
+                <!-- Posted Comments -->
+
+                <!-- Comments -->
+                {% for comment in comments %}
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <span>{{ comment.ownerId.first_name }} {{ comment.ownerId.last_name }} <a href="#">@{{ comment.ownerId.username }}</a>
+                        </span>
+                        <br>
+                        <small>{{ comment.create_date }}</small>
+                        <br>
+                        {{ comment.content | linebreaks }}
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+
+                <!-- --><!-- --><!-- --><!-- --><!-- nested commenting --><!-- --><!-- --><!-- --><!-- -->
+                <!-- Comment -->
+               <!--  <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Start Bootstrap
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <! Nested Comment -->
+                        <!-- <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Nested Start Bootstrap
+                                    <small>August 25, 2014 at 9:30 PM</small>
+                                </h4>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>  -->
+                        <!-- End Nested Comment -->
+                <!--     </div>
+                </div> -->
+                <!-- --> <!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- --><!-- -->
+
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Blog Search Well -->
+                <!-- <div class="well">
+                    <h4>Blog Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div> -->
+                    <!-- /.input-group -->
+                <!-- </div> -->
+
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                                <li><a href="#">Category Name</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+{% endblock %}
+
+
+    
