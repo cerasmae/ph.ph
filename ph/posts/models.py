@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 #########################################################
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.template.defaultfilters import slugify
 
 class ExampleModel(models.Model):
     content = RichTextUploadingField()
@@ -30,7 +31,7 @@ class BlogPost(models.Model):
 	owner = models.ForeignKey(User, related_name="blog_post")
 	title = models.CharField(max_length = 80)
 	slug = models.CharField(max_length = 80)
-	content = models.TextField()
+	content = RichTextUploadingField()
 	location = models.CharField(max_length = 30)
 	likes = models.IntegerField(default = 0)
 	flags = models.IntegerField(default = 0)
@@ -38,6 +39,10 @@ class BlogPost(models.Model):
 
 	def __str__(self):
 		return self.title
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.title)
+		super(BlogPost, self).save(*args, **kwargs)
 
 class Image(models.Model):
 	blogpost = models.ForeignKey(BlogPost)

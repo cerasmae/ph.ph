@@ -40,7 +40,7 @@
                 <hr>
 
                 <!-- Post Content -->
-                <p class="lead" align="right" style="color:red;">{{blogpost.content | linebreaks}}</p>
+                <p class="lead" align="right" style="color:red;">{{blogpost.content | safe | linebreaks }}</p>
                 <hr>
 
                 <!-- Blog Comments -->

@@ -9,13 +9,14 @@ from django.forms.widgets import PasswordInput, TextInput
 ###########################################
 
 from ckeditor.fields import RichTextFormField
+from ckeditor.fields import RichTextUploadingField 
+import ckeditor
 # from ckeditor.fields import RichTextUploadingFormField
 
 class CkEditorForm(forms.Form):
 	title = forms.CharField(widget=TextInput(attrs={'placeholder': 'Title', 'maxlength': '80'}))
-	content = RichTextFormField()
+	content = RichTextUploadingField()
 	location = forms.CharField(widget=TextInput(attrs={'placeholder': 'Location', 'maxlength': '30'}))
-
 ##########################################
 
 class ImageForm(forms.ModelForm):

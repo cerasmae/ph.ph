@@ -20,33 +20,25 @@ from django.views import generic
 
 from . import forms
 
-def createBlogPost_view(request):
-	form_class = forms.CkEditorForm
-
-	if request.user.is_authenticated():
-		if request.method == "POST":
-			title = request.POST['title'].strip()
-			content = forms.CkEditorForm()
-			location = request.POST['location'].strip()
-
-			bpost = BlogPost.objects.create(title=title, content=content, location=location, owner=request.user)
-			bpost.save()
-			return redirect('post-detail')
-
-	return render(request, 'form.html' )
-
-
 class CkEditorFormView(generic.FormView):
-    form_class = forms.CkEditorForm
-    template_name = 'form.html'
+	form_class = forms.CkEditorForm
+	template_name = 'form.html'
 
-    def form_valid(self, form):
-    	print "PLS WORK"
+	def form_valid(self, form):
+		title = form.cleaned_data['title']
+		content = form.cleaned_data['content']
+		location = form.cleaned_data['location']
 
-    def get_success_url(self):
-        # return reverse('ckeditor-form')
-        # return HttpResponse(self.request)
-        
+		print title + " " + location
+
+		blogpost = BlogPost.objects.create(owner=self.request.user, title=title, content=content, location=location)
+		blogpost.save()
+
+		return redirect('login')
+
+	def get_success_url(self):
+		return reverse('ckeditor-form')
+
 
 
 ckeditor_form_view = CkEditorFormView.as_view()
