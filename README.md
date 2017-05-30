@@ -1,6 +1,6 @@
-# ph.ph
+#GTA.ph
 
-__Philippine Hotspots__ is a venue designed to help people share and discover new places to visit and hang out at in the Philippines.
+__Go-To Areas: Philippines__ is a venue designed to help people share and discover new places to visit and hang out at in the Philippines.
 
 Features and Functionalities:
 * Users can create, edit, delete, and view blog posts
